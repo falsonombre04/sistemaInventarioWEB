@@ -9,19 +9,14 @@ const crearProducto = async (nombre,categoria,precio,stock)=>{
         stock: stock
     });
 
-    const productoGuardado = await producto.save();
-    console.log("-------------------------")
-    console.log("Producto guardado:", productoGuardado);
-    console.log("Base de datos:", Producto.db.name);
-    console.log("Colección:", Producto.collection.name);
-    console.log("-------------------------")
-    return productoGuardado;
+    return await producto.save();
 };
 
-const getAllProductos = ()=>{
-    return productos;
-}
+const obtenerProductos = async () => {
+    return await Producto.find();
+};
+
 module.exports = {
     crearProducto,
-    getAllProductos
+    obtenerProductos
 };

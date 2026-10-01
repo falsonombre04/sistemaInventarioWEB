@@ -1,7 +1,7 @@
 const Producto = require("../models/producto.model");
 const {
     crearProducto,
-    getAllProductos
+    obtenerProductos
 } = require("../services/producto.service");
 
 const crearMiProducto = async (req,res)=>{
@@ -15,4 +15,19 @@ const crearMiProducto = async (req,res)=>{
     }
 };
 
-module.exports = {crearMiProducto};
+const obtenerMisProductos = async (req, res) => {
+    try {
+        const productos = await obtenerProductos();
+
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({
+            mensaje: 'Error al obtener los productos'
+        });
+    }
+};
+
+module.exports = {
+    crearMiProducto,
+    obtenerMisProductos
+};
