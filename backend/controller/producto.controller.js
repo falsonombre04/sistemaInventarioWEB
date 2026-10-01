@@ -1,7 +1,8 @@
 const Producto = require("../models/producto.model");
 const {
     crearProducto,
-    obtenerProductos
+    obtenerProductos,
+    eliminarProducto
 } = require("../services/producto.service");
 
 const crearMiProducto = async (req,res)=>{
@@ -27,7 +28,30 @@ const obtenerMisProductos = async (req, res) => {
     }
 };
 
+const eliminarMiProducto = async (req, res) => {
+    try {
+        const producto = await eliminarProducto(req.params.id);
+
+        if (!producto) {
+            return res.status(404).json({
+                mensaje: 'Producto no encontrado'
+            });
+        }
+
+        res.status(200).json({
+            mensaje: 'Producto eliminado correctamente',
+            producto
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            mensaje: 'Error al eliminar el producto'
+        });
+    }
+};
+
 module.exports = {
     crearMiProducto,
-    obtenerMisProductos
+    obtenerMisProductos,
+    eliminarMiProducto
 };

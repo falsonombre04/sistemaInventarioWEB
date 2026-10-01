@@ -16,7 +16,12 @@ const obtenerProductos = async () => {
     return await Producto.find();
 };
 
+const eliminarProducto = async (id) => {
+    return await Producto.findByIdAndDelete(id);
+};
+
 module.exports = {
     crearProducto,
-    obtenerProductos
+    obtenerProductos,
+    eliminarProducto
 };
