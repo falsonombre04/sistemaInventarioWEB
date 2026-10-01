@@ -10,6 +10,7 @@ const crearMiProducto = async (req,res)=>{
         const producto = await crearProducto(nombre,categoria,precio,stock);
         res.status(201).json({producto,mensaje:"Producto creado correctamente"}); 
     }catch(error){
+        console.log(error)
         res.status(500).json({error});
     }
 };
